@@ -1,8 +1,0 @@
-extends:
-  - eslint:recommended
-env:
-  es6: false
-  browser: true
-  node: true
-rules:
-  semi: [ error, always ]
