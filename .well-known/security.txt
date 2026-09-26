@@ -1,0 +1,10 @@
+Contact: mailto:security@mycitadel.lol
+Contact: https://github.com/BeardedVikingTX/MyCitadel/security/advisories/new
+Expires: 2027-12-31T23:59:59.000Z
+Encryption: https://mycitadel.lol/.well-known/pgp-key.txt
+Encryption: https://mycitadel.lol/.well-known/openpgpkey/hu/t5s8ztdbon8yzntexy6oz5y48etqsnbb
+Acknowledgments: https://mycitadel.lol/security/hall-of-fame
+Preferred-Languages: en
+Canonical: https://mycitadel.lol/.well-known/security.txt
+Policy: https://mycitadel.lol/SECURITY.md
+Hiring: https://mycitadel.lol/careers
