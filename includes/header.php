@@ -48,14 +48,15 @@ $meta = citadel_meta();
     <meta name="twitter:description" content="<?= e($meta['og_description']) ?>">
     <meta name="twitter:image"       content="<?= e($meta['og_image']) ?>">
 
-    <!-- ── Favicons ───────────────────────────────────────────────── -->
-    <link rel="icon"             type="image/svg+xml" href="<?= e(CITADEL_VENDORS_URL) ?>/img/favicon.svg">
-    <link rel="icon"             type="image/png"     href="<?= e(CITADEL_VENDORS_URL) ?>/img/favicon-32.png" sizes="32x32">
-    <link rel="icon"             type="image/png"     href="<?= e(CITADEL_VENDORS_URL) ?>/img/favicon-16.png" sizes="16x16">
-    <link rel="apple-touch-icon"                      href="<?= e(CITADEL_VENDORS_URL) ?>/img/apple-touch-icon.png" sizes="180x180">
-    <link rel="mask-icon"                             href="<?= e(CITADEL_VENDORS_URL) ?>/img/safari-pinned-tab.svg" color="#00e5ff">
-    <meta name="msapplication-TileColor" content="#05070a">
-    <meta name="theme-color"             content="#05070a">
+    <!-- ═══════════════════════════════════════════════════════════════
+         FAVICONS — served from vendors.mycitadel.lol (public CDN)
+    =============================================================== -->
+    <link rel="icon" type="image/x-icon" href="https://vendors.mycitadel.lol/img/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://vendors.mycitadel.lol/img/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://vendors.mycitadel.lol/img/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://vendors.mycitadel.lol/img/apple-touch-icon.png">
+    <link rel="manifest" href="https://vendors.mycitadel.lol/img/site.webmanifest">
+    <meta name="theme-color" content="#00e5ff">
 
     <!-- ── PWA Manifest (future mobile) ───────────────────────────── -->
     <link rel="manifest" href="/manifest.webmanifest">

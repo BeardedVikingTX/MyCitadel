@@ -75,7 +75,7 @@ require_once __DIR__ . '/config.php';
                      aria-labelledby="citadel-nav-user-toggle">
 
                     <span class="citadel-nav__dropdown-heading">Citizen</span>
-                    <a href="/dashboard" role="menuitem">🏠 Dashboard</a>
+                    <a href="/users/dashboard" role="menuitem">🏠 Dashboard</a>
                     <a href="/feed"      role="menuitem">📡 Feed</a>
                     <a href="/users"     role="menuitem">👥 Citizens</a>
                     <a href="/connections" role="menuitem">🤝 Connections</a>
@@ -83,7 +83,7 @@ require_once __DIR__ . '/config.php';
                     <hr>
 
                     <span class="citadel-nav__dropdown-heading">Account</span>
-                    <a href="/profile"   role="menuitem">✎ Edit Profile</a>
+                    <a href="/users/edit"   role="menuitem">✎ Edit Profile</a>
                     <a href="/me"        role="menuitem">📝 My Posts</a>
                     <a href="/premium"   role="menuitem">⭐ Subscription</a>
                     <a href="/settings/2fa" role="menuitem">🛡️ Security &amp; 2FA</a>

@@ -68,10 +68,15 @@ require_once __DIR__ . '/config.php';
      • cookies.js     — UI session hydration (this project)
      Loaded with `defer` so they don't block the first paint.
      ========================================================================== -->
-<script src="<?= e(CITADEL_VENDORS_URL) ?>/js/citadel-app.js" defer></script>
+<script src="<?= e(CITADEL_VENDORS_URL) ?>/js/citadel-app.js?v=<?= filemtime('/home/beardedviking/vendors.mycitadel.lol/js/citadel-app.js') ?>" defer></script>
 <script src="<?= e(CITADEL_VENDORS_URL) ?>/js/cookies.js" defer></script>
-<script src="<?= e(CITADEL_VENDORS_URL) ?>/js/nav.js" defer></script>
+<script src="<?= e(CITADEL_VENDORS_URL) ?>/js/nav.js?v=<?= filemtime('/home/beardedviking/vendors.mycitadel.lol/js/nav.js') ?>" defer></script>
 <script src="<?= e(CITADEL_VENDORS_URL) ?>/js/contact.js" defer></script>
+<script src="<?= e(CITADEL_VENDORS_URL) ?>/js/register.js" defer></script>
+<script src="<?= e(CITADEL_VENDORS_URL) ?>/js/login.js" defer></script>
+<script src="<?= e(CITADEL_VENDORS_URL) ?>/js/dashboard.js" defer></script>
+<script src="<?= e(CITADEL_VENDORS_URL) ?>/js/profile-edit.js?v=1" defer></script>
+
 <?php if (!empty($GLOBALS['citadel_extra_scripts'] ?? null)): ?>
 <?php foreach ($GLOBALS['citadel_extra_scripts'] as $src): ?>
 <script src="<?= e($src) ?>" defer></script>
