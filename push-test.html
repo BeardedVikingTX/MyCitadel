@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Push Test — MyCitadel</title>
+<link rel="stylesheet" href="https://vendors.mycitadel.lol/css/citadel.css">
+<style>
+  .wrap { max-width: 640px; margin: 3rem auto; padding: 1rem; }
+  .out {
+    font-family: var(--f-mono); font-size: 0.85rem; padding: 1rem;
+    border-radius: var(--r-sm); border-left: 3px solid var(--c-cyan);
+    background: var(--c-abyss); margin-top: 1rem;
+    white-space: pre-wrap; word-break: break-all;
+  }
+  .out.err { border-left-color: var(--c-blood); }
+  .out.ok  { border-left-color: var(--c-success); }
+  .row { margin-bottom: 0.75rem; }
+</style>
+</head>
+<body>
+
+<header class="citadel-hero">
+  <h1 class="citadel-title">Push Test</h1>
+  <p class="citadel-subtitle">Web Notification Sandbox</p>
+</header>
+
+<div class="wrap">
+
+  <!-- ── LOGIN PANEL ─────────────────────────────────────────────── -->
+  <div class="panel" id="login-panel">
+    <h3>1. Login</h3>
+    <p style="color:var(--c-text-dim);">
+      You must be logged in before subscribing to push notifications.
+    </p>
+    <div class="row">
+      <input class="form-input" id="lg-id" placeholder="username or email">
+    </div>
+    <div class="row">
+      <input class="form-input" id="lg-pw" type="password" placeholder="password">
+    </div>
+    <button class="btn-cyber" id="btn-login">Login</button>
+    <div class="out" id="out-login" style="display:none;">—</div>
+  </div>
+
+  <!-- ── PUSH PANEL (hidden until logged in) ─────────────────────── -->
+  <div class="panel" id="push-panel" style="display:none;">
+    <h3>2. Enable Push Notifications</h3>
+    <div class="out ok" id="who" style="margin-bottom:1rem;">—</div>
+    <button class="btn-cyber" id="btn-enable">Enable Notifications</button>
+    <button class="btn-danger" id="btn-disable" style="margin-left:0.5rem;">Disable</button>
+    <div class="out" id="out" style="display:none;">—</div>
+  </div>
+
+  <span class="rune-divider">ᚠ ᚢ ᚦ ᚨ ᚱ ᚲ</span>
+</div>
+
+<script>
+/* ============================================================================
+ * PUSH TEST — LOGIN THEN SUBSCRIBE
+ * ========================================================================== */
+
+const API = 'https://api.mycitadel.lol/v1';
+const CLIENT_HEADER = { 'X-Citadel-Client': 'browser/1.0.0' };
+
+let csrfToken = null;
+let currentUser = null;
+
+const $ = (id) => document.getElementById(id);
+
+function log(el, msg, cls) {
+    if (typeof el === 'string') el = $(el);
+    el.textContent = typeof msg === 'string' ? msg : JSON.stringify(msg, null, 2);
+    el.className = 'out' + (cls ? ' ' + cls : '');
+    el.style.display = 'block';
+}
+
+async function fetchCsrf() {
+    const res = await fetch(API + '/auth/csrf.php', {
+        credentials: 'include',
+        headers: CLIENT_HEADER,
+    });
+    const data = await res.json();
+    csrfToken = data.token;
+    return csrfToken;
+}
+
+/* ── LOGIN ─────────────────────────────────────────────────────────── */
+async function doLogin() {
+    const identifier = $('lg-id').value.trim();
+    const password   = $('lg-pw').value;
+
+    if (!identifier || !password) {
+        log('out-login', 'Username and password are required.', 'err');
+        return;
+    }
+
+    try {
+        await fetchCsrf();
+
+        const res = await fetch(API + '/auth/login.php', {
+            method: 'POST',
+            credentials: 'include',
+            headers: Object.assign({
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': csrfToken,
+            }, CLIENT_HEADER),
+            body: JSON.stringify({ identifier, password }),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+            log('out-login', 'Login failed: ' + (data.message || data.code), 'err');
+            return;
+        }
+
+        // Adopt the rotated CSRF token from the login response
+        if (data.csrf_token) csrfToken = data.csrf_token;
+        currentUser = data.user;
+
+        log('out-login', 'Logged in as ' + data.user.username, 'ok');
+
+        // Show the push panel
+        $('login-panel').style.display = 'none';
+        $('push-panel').style.display = 'block';
+        log('who', 'Logged in as: ' + data.user.username + ' (id=' + data.user.id + ')', 'ok');
+
+    } catch (err) {
+        log('out-login', 'Network error: ' + err.message, 'err');
+    }
+}
+
+/* ── ENABLE PUSH ───────────────────────────────────────────────────── */
+async function enable() {
+    try {
+        if (!('serviceWorker' in navigator) || !('PushManager' in window)) {
+            log('out', 'This browser does not support Web Push.', 'err');
+            return;
+        }
+
+        const permission = await Notification.requestPermission();
+        if (permission !== 'granted') {
+            log('out', 'Notification permission denied.', 'err');
+            return;
+        }
+        log('out', 'Permission granted. Registering service worker…');
+
+        const reg = await navigator.serviceWorker.register('/service-worker.js', {
+            scope: '/',
+        });
+        await navigator.serviceWorker.ready;
+        log('out', 'Service worker registered. Fetching VAPID key…');
+
+        const vapidRes = await fetch(API + '/push/vapid-public-key.php', {
+            headers: CLIENT_HEADER,
+        });
+        const vapidData = await vapidRes.json();
+        if (!vapidData.public_key) {
+            log('out', 'Could not fetch VAPID public key.', 'err');
+            return;
+        }
+
+        const vapidKey = urlBase64ToUint8Array(vapidData.public_key);
+
+        log('out', 'Subscribing to push…');
+        const subscription = await reg.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: vapidKey,
+        });
+
+        await fetchCsrf();
+
+        const subJson = subscription.toJSON();
+        const subRes = await fetch(API + '/push/subscribe.php', {
+            method: 'POST',
+            credentials: 'include',
+            headers: Object.assign({
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': csrfToken,
+            }, CLIENT_HEADER),
+            body: JSON.stringify(subJson),
+        });
+
+        const subData = await subRes.json();
+        if (!subRes.ok) {
+            log('out', 'Server rejected subscription: ' + (subData.message || subData.code), 'err');
+            return;
+        }
+
+        log('out', '✅ Push notifications enabled for this browser.', 'ok');
+    } catch (err) {
+        log('out', 'Error: ' + err.message, 'err');
+    }
+}
+
+/* ── DISABLE PUSH ──────────────────────────────────────────────────── */
+async function disable() {
+    try {
+        const reg = await navigator.serviceWorker.ready;
+        const subscription = await reg.pushManager.getSubscription();
+        if (!subscription) {
+            log('out', 'No active subscription.', 'err');
+            return;
+        }
+
+        await fetchCsrf();
+        const subJson = subscription.toJSON();
+
+        const res = await fetch(API + '/push/unsubscribe.php', {
+            method: 'POST',
+            credentials: 'include',
+            headers: Object.assign({
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': csrfToken,
+            }, CLIENT_HEADER),
+            body: JSON.stringify({ endpoint: subJson.endpoint }),
+        });
+        const data = await res.json();
+
+        await subscription.unsubscribe();
+        log('out', 'Subscription removed.\n' + JSON.stringify(data, null, 2), 'ok');
+    } catch (err) {
+        log('out', 'Error: ' + err.message, 'err');
+    }
+}
+
+function urlBase64ToUint8Array(base64String) {
+    const padding = '='.repeat((4 - base64String.length % 4) % 4);
+    const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
+    const rawData = atob(base64);
+    const output = new Uint8Array(rawData.length);
+    for (let i = 0; i < rawData.length; i++) output[i] = rawData.charCodeAt(i);
+    return output;
+}
+
+$('btn-login').addEventListener('click', doLogin);
+$('btn-enable').addEventListener('click', enable);
+$('btn-disable').addEventListener('click', disable);
+
+// Enter key submits login
+$('lg-pw').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') doLogin();
+});
+</script>
+
+</body>
+</html>

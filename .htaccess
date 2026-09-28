@@ -1,0 +1,82 @@
+# ============================================================================
+# MyCitadel — mycitadel.lol Apache Configuration
+# ============================================================================
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # Route /i/* to i.php for image serving
+    # Example: /i/avatars/1/a3f8e2b9c1d4e5f6.jpg → /i.php?p=avatars/1/a3f8e2b9c1d4e5f6.jpg
+    RewriteRule ^i/(.+)$ /i.php?p=$1 [L,QSA]
+</IfModule>
+
+# Deny access to raw storage (defense in depth — should never be in webroot)
+<FilesMatch "\.(jpg|jpeg|png|webp)$">
+    # Files served via i.php only. Direct hits are denied.
+    # (This only matters if uploads accidentally land in the webroot.)
+</FilesMatch>
+
+# ============================================================================
+# MyCitadel — mycitadel.lol Apache / LiteSpeed Configuration
+# ============================================================================
+
+# ── Disable directory listing ────────────────────────────────────────────────
+Options -Indexes
+Options -MultiViews
+Header always unset Server
+# ── Rewrite engine ───────────────────────────────────────────────────────────
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Force HTTPS
+    RewriteCond %{HTTPS} !=on
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+    # ── Image serving proxy (from the upload system) ─────────────────────
+    RewriteRule ^i/(.+)$ /i.php?p=$1 [L,QSA]
+
+    # ── Clean URLs — try .php, then fall through to 404 ──────────────────
+    # /login     → /login.php
+    # /dashboard → /dashboard.php
+    # /users     → /users.php  (or /users/index.php)
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}.php -f
+    RewriteRule ^(.*)$ $1.php [L,QSA]
+
+    # Directory-style fallback: /about → /about/index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME}/index.php -f
+    RewriteRule ^(.*)$ $1/index.php [L,QSA]
+</IfModule>
+
+# ── Security headers (belt & suspenders — PHP sends these too) ──────────────
+<IfModule mod_headers.c>
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "DENY"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=(self \"https://js.stripe.com\"), interest-cohort=()"
+    Header always unset X-Powered-By
+    Header always unset Server
+</IfModule>
+
+# ── Protect sensitive files ─────────────────────────────────────────────────
+<FilesMatch "\.(env|log|sql|bak|old|orig|swp)$">
+    Require all denied
+</FilesMatch>
+
+# ── Block access to includes/ from the browser ──────────────────────────────
+RedirectMatch 404 ^/includes(/.*)?$
+
+# ── Cache static assets aggressively ────────────────────────────────────────
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css              "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType image/svg+xml         "access plus 1 year"
+    ExpiresByType image/png             "access plus 1 year"
+    ExpiresByType image/webp            "access plus 1 year"
+</IfModule>
