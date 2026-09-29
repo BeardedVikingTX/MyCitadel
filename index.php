@@ -275,6 +275,100 @@ require __DIR__ . '/includes/nav.php';
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════════════
+         ANDROID BETA
+         ═══════════════════════════════════════════════════════════════════ -->
+    <section class="citadel-section citadel-section--dark" id="android">
+        <div class="citadel-section__inner">
+            <h2 class="citadel-section__title">Take The Citadel With You</h2>
+            <p class="citadel-section__lede">
+                The Android app is in open beta. Register, log in, post,
+                upload media, connect with other Citizens — all from your
+                phone, against the same encrypted backend.
+            </p>
+
+            <div class="panel android-card">
+                <div class="android-card__icon" aria-hidden="true">🤖</div>
+
+                <div class="android-card__body">
+                    <div class="android-card__heading">
+                        <h3>MyCitadel for Android</h3>
+                        <span class="android-card__badge">BETA</span>
+                    </div>
+
+                    <ul class="android-card__meta">
+                        <li><strong>Version</strong> v0.3.0</li>
+                        <li><strong>Requires</strong> Android 8.0+</li>
+                        <li><strong>Size</strong> ~15 MB</li>
+                        <li><strong>Updated</strong> Sep 2026</li>
+                    </ul>
+
+                    <p class="android-card__note">
+                        This is a debug build of the Android app. It is signed
+                        with a development key, meaning future updates require
+                        uninstalling and reinstalling. That is intentional —
+                        the release build with a permanent signing key ships
+                        with the Play Store launch.
+                    </p>
+
+                    <div class="android-card__actions">
+                        <a href="/downloads/MyCitadel-Beta-v0.3.0.apk"
+                           download
+                           class="btn-cyber btn-gold">
+                            Download APK
+                        </a>
+                        <a href="#install-instructions"
+                           class="btn-cyber">
+                            How to Install
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- ── Install instructions ─────────────────────────────── -->
+            <div class="android-install" id="install-instructions">
+                <h3>Installing the Beta</h3>
+                <ol>
+                    <li>
+                        <strong>Download the APK</strong> on your Android phone.
+                        Tap the download button above, or scan the QR code.
+                    </li>
+                    <li>
+                        <strong>Allow installs from this source.</strong>
+                        When Android asks, tap <em>Settings</em> and enable
+                        &ldquo;Allow from this source&rdquo; for your browser
+                        (Chrome, Firefox, etc.).
+                    </li>
+                    <li>
+                        <strong>Open the APK.</strong>
+                        From the notification tray, or Files → Downloads →
+                        <code>MyCitadel-Beta-v0.3.0.apk</code>.
+                    </li>
+                    <li>
+                        <strong>Tap &ldquo;Install anyway&rdquo;</strong> if
+                        Play Protect shows a warning. Only install the file
+                        you downloaded from <code>mycitadel.lol</code> — verify
+                        the URL in your browser's address bar.
+                    </li>
+                    <li>
+                        <strong>Open the app, register, and explore.</strong>
+                        Report bugs to <a href="mailto:info@mycitadel.lol">info@mycitadel.lol</a>.
+                    </li>
+                </ol>
+
+                <p class="android-install__warn">
+                    <strong>⚠️ Sideloading warning:</strong>
+                    Installing apps outside of the Play Store carries risk.
+                    Only install from sources you trust. Every APK from
+                    MyCitadel is served from <code>mycitadel.lol</code> over
+                    HTTPS. Never install an APK that claims to be MyCitadel
+                    from any other source.
+                </p>
+            </div>
+        </div>
+    </section>    
+
+    <!-- ═══════════════════════════════════════════════════════════════════
          PREMIUM TEASER
          ═══════════════════════════════════════════════════════════════════ -->
     <section class="citadel-section">
