@@ -78,7 +78,7 @@ require_once __DIR__ . '/config.php';
                     <a href="/users/dashboard" role="menuitem">🏠 Dashboard</a>
                     <a href="/feed"      role="menuitem">📡 Feed</a>
                     <a href="/users/index"     role="menuitem">👥 Citizens</a>
-                    <a href="/connections" role="menuitem">🤝 Connections</a>
+                    <a href="/messages" role="menuitem">💬 Messages</a>
 
                     <hr>
 
