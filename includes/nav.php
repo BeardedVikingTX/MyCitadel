@@ -77,7 +77,7 @@ require_once __DIR__ . '/config.php';
                     <span class="citadel-nav__dropdown-heading">Citizen</span>
                     <a href="/users/dashboard" role="menuitem">🏠 Dashboard</a>
                     <a href="/feed"      role="menuitem">📡 Feed</a>
-                    <a href="/users"     role="menuitem">👥 Citizens</a>
+                    <a href="/users/index"     role="menuitem">👥 Citizens</a>
                     <a href="/connections" role="menuitem">🤝 Connections</a>
 
                     <hr>

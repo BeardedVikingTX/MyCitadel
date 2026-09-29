@@ -1,2 +1,8 @@
 [27-Sep-2026 21:35:14 UTC] PHP Warning:  Undefined variable $type in /home/beardedviking/mycitadel.lol/i.php on line 46
 [28-Sep-2026 14:37:48 UTC] [web-mailer] SMTP not configured
+[29-Sep-2026 00:19:24 UTC] PHP Warning:  require(/home/beardedviking/mycitadel.lol/../includes/footer.php): Failed to open stream: No such file or directory in /home/beardedviking/mycitadel.lol/notifications.php on line 67
+[29-Sep-2026 00:19:24 UTC] PHP Warning:  require(/home/beardedviking/mycitadel.lol/../includes/footer.php): Failed to open stream: No such file or directory in /home/beardedviking/mycitadel.lol/notifications.php on line 67
+[29-Sep-2026 00:19:24 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/beardedviking/mycitadel.lol/../includes/footer.php' (include_path='.:/opt/alt/php85/usr/share/pear:/opt/alt/php85/usr/share/php:/usr/share/pear:/usr/share/php') in /home/beardedviking/mycitadel.lol/notifications.php:67
+Stack trace:
+#0 {main}
+  thrown in /home/beardedviking/mycitadel.lol/notifications.php on line 67
