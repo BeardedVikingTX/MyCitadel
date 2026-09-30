@@ -1,24 +1,34 @@
 <?php
 /* ============================================================================
  * ███ MYCITADEL.LOL/INDEX.PHP ███
- * The public landing page. Hook, evidence, solution, and call to action.
+ * The public landing page. Hook, evidence, features, tiers, and CTA.
+ * ----------------------------------------------------------------------------
+ * Section order (why it's this order):
+ *   01 Hero        — what is this, why care, two doors in
+ *   02 Evidence    — the problem (public record of the others)
+ *   03 Mechanism   — the difference (how we're built)
+ *   04 Arsenal     — the features (what you actually get to do)
+ *   05 Tiers       — Free vs Premium (what free covers, what $10 unlocks)
+ *   06 Shield      — Stalker Shield (why parents can trust this)
+ *   07 Journey     — How it works, four steps
+ *   08 Promises    — the guarantees, no weasel words
+ *   09 Android     — take it with you (Play Store coming)
+ *   10 Final CTA
  * ========================================================================== */
 
 declare(strict_types=1);
 
 require_once __DIR__ . '/includes/config.php';
 
-// ── Per-page meta ─────────────────────────────────────────────────────────
 citadel_set_meta([
     'title'       => 'MyCitadel — Your Digital Fortress',
-    'description' => 'A privacy-first social platform built on zero-knowledge architecture. Argon2id, envelope encryption, no tracking. Your data is encrypted before it ever reaches our servers.',
+    'description' => 'A privacy-first social platform built on encrypted-by-architecture design. Argon2id authentication, envelope-encrypted PII, no trackers, no ad networks, no data sale. Free to use. $10/month if you want more.',
     'og_title'    => 'MyCitadel — Your Digital Fortress',
     'og_url'      => CITADEL_SITE_URL,
     'canonical'   => CITADEL_SITE_URL,
     'body_class'  => 'page-home',
 ]);
 
-// ── Load includes ─────────────────────────────────────────────────────────
 require __DIR__ . '/includes/header.php';
 require __DIR__ . '/includes/nav.php';
 ?>
@@ -26,31 +36,42 @@ require __DIR__ . '/includes/nav.php';
 <main class="page-home__main">
 
     <!-- ═══════════════════════════════════════════════════════════════════
-         HERO
+         01 — HERO
          ═══════════════════════════════════════════════════════════════════ -->
     <section class="citadel-hero">
         <div class="citadel-hero__inner">
             <span class="citadel-hero__rune" aria-hidden="true">ᚠ ᚢ ᚦ ᚨ ᚱ ᚲ</span>
+
             <h1 class="citadel-title">MyCitadel</h1>
             <p class="citadel-subtitle">Your Digital Fortress</p>
+
             <p class="citadel-hero__lede">
-                Social media has become surveillance. We built the alternative —
-                a platform where your data is encrypted before it ever leaves your device.
+                Every social platform you use sells your attention.
+                We built the one that cannot — because we never see your data
+                in the first place. Encrypted before it leaves your device.
                 No trackers. No ad networks. No compromise.
             </p>
+
             <div class="citadel-hero__cta">
-                <a href="/register" class="btn btn-outline-success btn-lg">
-                    <button type="button" class="btn btn-outline-success btn-lg">
-                        Enter the Citadel
-                    </button>
-                </a>
-                <a href="#evidence" class="btn btn-outline-warning btn-lg">See the Evidence</a>
+                <a href="/register" class="btn-cyber btn-gold btn-lg">Enter the Citadel</a>
+                <a href="#tiers" class="btn-cyber btn-lg">See Free vs Premium</a>
             </div>
+
+            <ul class="citadel-hero__stats" aria-label="Platform facts">
+                <li><strong>0</strong> third-party trackers</li>
+                <li><strong>0</strong> ad networks</li>
+                <li><strong>0</strong> data sold</li>
+                <li><strong>100%</strong> visible source</li>
+            </ul>
+
+            <p class="citadel-hero__fine">
+                Free forever. Premium at <strong>$10/month</strong> if you want higher limits.
+            </p>
         </div>
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════════════
-         THE EVIDENCE — "WHY YOU NEED A FORTRESS"
+         02 — EVIDENCE
          ═══════════════════════════════════════════════════════════════════ -->
     <section class="citadel-section" id="evidence">
         <div class="citadel-section__inner">
@@ -64,7 +85,7 @@ require __DIR__ . '/includes/nav.php';
             <div class="evidence-grid">
 
                 <article class="panel evidence-card">
-                    <h3>Meta (Facebook & Instagram)</h3>
+                    <h3>Meta (Facebook &amp; Instagram)</h3>
                     <div class="evidence-card__stat">
                         <span class="evidence-card__number">43.8M</span>
                         <span class="evidence-card__label">Privacy Violations Found by Jury</span>
@@ -136,7 +157,7 @@ require __DIR__ . '/includes/nav.php';
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════════════
-         THE MECHANISM — HOW WE'RE DIFFERENT
+         03 — MECHANISM
          ═══════════════════════════════════════════════════════════════════ -->
     <section class="citadel-section citadel-section--dark">
         <div class="citadel-section__inner">
@@ -189,9 +210,293 @@ require __DIR__ . '/includes/nav.php';
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════════════
-         HOW IT WORKS
+         04 — ARSENAL (what you actually get to do)
          ═══════════════════════════════════════════════════════════════════ -->
-    <section class="citadel-section">
+    <section class="citadel-section" id="features">
+        <div class="citadel-section__inner">
+            <h2 class="citadel-section__title">The Arsenal</h2>
+            <p class="citadel-section__lede">
+                Everything you need to actually live online — without giving
+                your life away to do it. All features below are live today.
+            </p>
+
+            <div class="arsenal-grid">
+
+                <article class="panel arsenal-card">
+                    <h3>⚔ Connections, Not Followers</h3>
+                    <p>Mutual by design. Nobody sees your profile, posts, or comments
+                       unless you accept them first — and vice versa. Blocking is
+                       silent, mutual, and permanent.</p>
+                </article>
+
+                <article class="panel arsenal-card">
+                    <h3>📡 Posts With Real Privacy</h3>
+                    <p>Every post carries its own visibility — public, connections-only,
+                       or private to yourself. Attach images, video, audio, documents,
+                       or archives. Edit freely. Delete for real.</p>
+                </article>
+
+                <article class="panel arsenal-card">
+                    <h3>💬 Threaded Comments</h3>
+                    <p>Reply to replies. The conversation stays coherent. Comment
+                       visibility follows the post's own visibility — no leaks, no
+                       gotchas.</p>
+                </article>
+
+                <article class="panel arsenal-card">
+                    <h3>❤ Reactions That Say Something</h3>
+                    <p>Like, dislike, heart, angry. Real emotional vocabulary, not
+                       just a binary thumb. Reaction counts on every post.</p>
+                </article>
+
+                <article class="panel arsenal-card">
+                    <h3>✉ Encrypted Messaging</h3>
+                    <p>Direct conversations with your connections. Attach files.
+                       Every message encrypted at rest. Sever a connection and the
+                       whole conversation is destroyed — not archived, destroyed.</p>
+                </article>
+
+                <article class="panel arsenal-card">
+                    <h3>🔔 Real-Time Notifications</h3>
+                    <p>Web Push to your browser. Know when someone connects,
+                       comments, or reacts — without a tab open. No tracking pixel
+                       hiding in the notification payload.</p>
+                </article>
+
+                <article class="panel arsenal-card">
+                    <h3>🏆 Reputation &amp; Badges</h3>
+                    <p>Earn reputation for posting, commenting, connecting, and
+                       helping. Unlock badges for milestones. Every award is
+                       recorded in an immutable ledger you can inspect.</p>
+                </article>
+
+                <article class="panel arsenal-card">
+                    <h3>🎨 Full Profile Control</h3>
+                    <p>Avatar, banner, wallpaper, accent color, fonts, borders,
+                       background music. 60+ fields. Every piece of PII optional
+                       and encrypted. Your space, your rules.</p>
+                </article>
+
+                <article class="panel arsenal-card">
+                    <div class="arsenal-card__icon" aria-hidden="true">🔍</div>
+                    <h3>Discovery Without Exposure</h3>
+                    <p>Search by username or display name. Blocked users never
+                       appear. Hidden accounts return 404 — never "you cannot
+                       view this user." No existence leak.</p>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         05 — TIERS (Free vs Premium — the centerpiece)
+         ═══════════════════════════════════════════════════════════════════ -->
+    <section class="citadel-section citadel-section--dark" id="tiers">
+        <div class="citadel-section__inner">
+            <h2 class="citadel-section__title">Free vs Premium</h2>
+            <p class="citadel-section__lede">
+                MyCitadel is free forever. Premium is for Citizens who want
+                more room, more reach, and more tools — and it is the only
+                thing keeping this platform alive. No ads. No data sale.
+                Just $10/month if you choose it.
+            </p>
+
+            <!-- ── Two pricing cards ──────────────────────────────────── -->
+            <div class="tier-cards">
+
+                <article class="tier-card tier-card--free">
+                    <span class="tier-card__badge">Free</span>
+                    <h3 class="tier-card__name">Forever</h3>
+                    <div class="tier-card__price">$0<span>/month</span></div>
+                    <p class="tier-card__tagline">
+                        The full platform. Free is not a demo — it is the
+                        Citadel, and it always will be.
+                    </p>
+                    <ul class="tier-card__highlights">
+                        <li>Post up to 50 characters + 1 image</li>
+                        <li>Comment up to 25 characters</li>
+                        <li>Like &amp; dislike reactions</li>
+                        <li>1-on-1 encrypted messaging</li>
+                        <li>All privacy &amp; connection controls</li>
+                    </ul>
+                    <a href="/register" class="btn-cyber tier-card__cta">Create free account</a>
+                </article>
+
+                <article class="tier-card tier-card--premium">
+                    <span class="tier-card__badge tier-card__badge--gold">Premium</span>
+                    <h3 class="tier-card__name">Citadel+</h3>
+                    <div class="tier-card__price tier-card__price--gold">$10<span>/month</span></div>
+                    <p class="tier-card__tagline">
+                        Higher limits, all four reactions, group messaging
+                        with admin controls, and a badge that announces
+                        itself everywhere you appear.
+                    </p>
+                    <ul class="tier-card__highlights">
+                        <li>Post up to <strong>1,500 chars</strong> + 10 attachments</li>
+                        <li>Comment up to <strong>1,500 chars</strong> + 5 attachments</li>
+                        <li>All reactions: like, dislike, heart, angry</li>
+                        <li>Group messaging + admin moderation</li>
+                        <li><strong>+2,500 reputation</strong> every month</li>
+                    </ul>
+                    <a href="/register" class="btn-cyber btn-gold tier-card__cta">Go Premium</a>
+                </article>
+
+            </div>
+
+            <!-- ── Full comparison table ─────────────────────────────── -->
+            <div class="tier-compare">
+
+                <!-- Header row -->
+                <div class="tier-compare__head tier-compare__head--label"></div>
+                <div class="tier-compare__head tier-compare__head--free">Free</div>
+                <div class="tier-compare__head tier-compare__head--premium">Premium</div>
+
+                <!-- ── Posts ──────────────────────────────────────────── -->
+                <div class="tier-compare__group">Posts</div>
+
+                <div class="tier-compare__label">Post length</div>
+                <div class="tier-compare__free">50 characters</div>
+                <div class="tier-compare__premium">1,500 characters</div>
+
+                <div class="tier-compare__label">Attachments per post</div>
+                <div class="tier-compare__free">1 image</div>
+                <div class="tier-compare__premium">Up to 10 — images, video, audio, documents, archives</div>
+
+                <div class="tier-compare__label">Post visibility</div>
+                <div class="tier-compare__free"><span class="tc-check">✓</span> Public · Connections · Private</div>
+                <div class="tier-compare__premium"><span class="tc-check">✓</span> Public · Connections · Private</div>
+
+                <!-- ── Comments ───────────────────────────────────────── -->
+                <div class="tier-compare__group">Comments</div>
+
+                <div class="tier-compare__label">Comment length</div>
+                <div class="tier-compare__free">25 characters</div>
+                <div class="tier-compare__premium">1,500 characters</div>
+
+                <div class="tier-compare__label">Attachments per comment</div>
+                <div class="tier-compare__free">1 image</div>
+                <div class="tier-compare__premium">Up to 5 — all file types</div>
+
+                <!-- ── Reactions ──────────────────────────────────────── -->
+                <div class="tier-compare__group">Reactions</div>
+
+                <div class="tier-compare__label">Available reactions</div>
+                <div class="tier-compare__free">Like · Dislike</div>
+                <div class="tier-compare__premium">Like · Dislike · Heart · Angry</div>
+
+                <!-- ── Messaging ──────────────────────────────────────── -->
+                <div class="tier-compare__group">Messaging</div>
+
+                <div class="tier-compare__label">Start conversations</div>
+                <div class="tier-compare__free">1-on-1 only</div>
+                <div class="tier-compare__premium">1-on-1 and group</div>
+
+                <div class="tier-compare__label">Be invited to groups</div>
+                <div class="tier-compare__free"><span class="tc-check">✓</span></div>
+                <div class="tier-compare__premium"><span class="tc-check">✓</span></div>
+
+                <div class="tier-compare__label">Attachments per message</div>
+                <div class="tier-compare__free">1 image</div>
+                <div class="tier-compare__premium">Up to 10 — all file types</div>
+
+                <div class="tier-compare__label">Delete own messages</div>
+                <div class="tier-compare__free"><span class="tc-check">✓</span></div>
+                <div class="tier-compare__premium"><span class="tc-check">✓</span></div>
+
+                <div class="tier-compare__label">Delete conversations you created</div>
+                <div class="tier-compare__free"><span class="tc-x">—</span></div>
+                <div class="tier-compare__premium">Full destruction for all participants</div>
+
+                <div class="tier-compare__label">Group admins can delete any message</div>
+                <div class="tier-compare__free"><span class="tc-x">—</span></div>
+                <div class="tier-compare__premium">Hard delete — gone for everyone</div>
+
+                <!-- ── Profile & Standing ─────────────────────────────── -->
+                <div class="tier-compare__group">Profile &amp; Standing</div>
+
+                <div class="tier-compare__label">Premium badge</div>
+                <div class="tier-compare__free"><span class="tc-x">—</span></div>
+                <div class="tier-compare__premium"><span class="tc-check">✓</span> Everywhere you appear</div>
+
+                <div class="tier-compare__label">Monthly reputation bonus</div>
+                <div class="tier-compare__free"><span class="tc-x">—</span></div>
+                <div class="tier-compare__premium"><strong>+2,500 rep</strong> on every renewal</div>
+
+                <div class="tier-compare__label">Priority support</div>
+                <div class="tier-compare__free">Standard</div>
+                <div class="tier-compare__premium">Priority queue</div>
+
+            </div><!-- /.tier-compare -->
+
+            <p class="tier-compare__fine">
+                <strong>Downgrading is not punishment.</strong> If you cancel
+                Premium, everything you created while subscribed stays exactly
+                as it is — posts, comments, attachments, deleted conversations.
+                You lose the badge, the monthly bonus, and the higher limits
+                on <em>new</em> activity. Nothing you have made is destroyed.
+            </p>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         06 — STALKER SHIELD
+         ═══════════════════════════════════════════════════════════════════ -->
+    <section class="citadel-section" id="shield">
+        <div class="citadel-section__inner">
+            <h2 class="citadel-section__title">Stalker Shield</h2>
+            <p class="citadel-section__lede">
+                The most dangerous feature of any social platform is the ease
+                with which a stranger can find, watch, and follow someone.
+                We built against that from day one.
+            </p>
+
+            <div class="shield-preview">
+
+                <article class="panel shield-preview__card">
+                    <h3>Visibility Is a Choice</h3>
+                    <p>Nothing about you is public by default. Every profile,
+                       every post, every comment sits behind an accepted
+                       connection. You decide who sees what, per person,
+                       at any time.</p>
+                </article>
+
+                <article class="panel shield-preview__card">
+                    <h3>Silent, Permanent Blocks</h3>
+                    <p>Blocking is mutual, immediate, and silent. The blocked
+                       party gets no notification — they simply vanish from
+                       your world, and you from theirs. No escalation, no
+                       "user X blocked you" message.</p>
+                </article>
+
+                <article class="panel shield-preview__card">
+                    <h3>Invisible Mode</h3>
+                    <p>Set your account to hidden and you become invisible to
+                       everyone but yourself. Even a direct ID guess returns
+                       404 — no existence leak. This is a permanent option,
+                       not a temporary state.</p>
+                </article>
+
+                <article class="panel shield-preview__card">
+                    <h3>No Cold Contact</h3>
+                    <p>Messaging requires an accepted connection. Connection
+                       requests require mutual acceptance. There is no way
+                       for a stranger to reach you. Not one. No cold DMs,
+                       ever.</p>
+                </article>
+
+            </div>
+
+            <div class="citadel-section__cta">
+                <a href="/security#stalker-shield" class="btn-cyber">Read the Full Stalker Shield</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════════════
+         07 — HOW IT WORKS
+         ═══════════════════════════════════════════════════════════════════ -->
+    <section class="citadel-section citadel-section--dark">
         <div class="citadel-section__inner">
             <h2 class="citadel-section__title">How It Works</h2>
             <p class="citadel-section__lede">Four steps from outsider to citizen.</p>
@@ -212,8 +517,8 @@ require __DIR__ . '/includes/nav.php';
                 <li class="step-card">
                     <div class="step-card__num">03</div>
                     <h3>Connect</h3>
-                    <p>Send connection requests to people you trust. Nobody sees your
-                       profile until you accept them — and vice versa.</p>
+                    <p>Send connection requests to people you trust. Nobody sees
+                       your profile until you accept them — and vice versa.</p>
                 </li>
                 <li class="step-card">
                     <div class="step-card__num">04</div>
@@ -226,9 +531,9 @@ require __DIR__ . '/includes/nav.php';
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════════════
-         GUARANTEES
+         08 — PROMISES
          ═══════════════════════════════════════════════════════════════════ -->
-    <section class="citadel-section citadel-section--dark">
+    <section class="citadel-section">
         <div class="citadel-section__inner">
             <h2 class="citadel-section__title">Our Promises</h2>
 
@@ -249,7 +554,17 @@ require __DIR__ . '/includes/nav.php';
                         <strong>You can leave at any time.</strong>
                         <p>Account deletion destroys your posts, comments, reactions,
                            and connections — permanently. No soft-delete limbo, no
-                           data retention games.</p>
+                           data retention games. When we say delete, we mean it.</p>
+                    </div>
+                </div>
+
+                <div class="guarantee-item">
+                    <span class="guarantee-item__mark" aria-hidden="true">✓</span>
+                    <div>
+                        <strong>Free is not a demo.</strong>
+                        <p>Everything you need to actually use the platform is
+                           available for free, forever. Premium exists for people
+                           who want more — not to hold the basic experience hostage.</p>
                     </div>
                 </div>
 
@@ -275,15 +590,14 @@ require __DIR__ . '/includes/nav.php';
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════════════
-         ANDROID BETA
+         09 — ANDROID
          ═══════════════════════════════════════════════════════════════════ -->
     <section class="citadel-section citadel-section--dark" id="android">
         <div class="citadel-section__inner">
             <h2 class="citadel-section__title">Take The Citadel With You</h2>
             <p class="citadel-section__lede">
-                The Android app is in open beta. Register, log in, post,
-                upload media, connect with other Citizens — all from your
-                phone, against the same encrypted backend.
+                The native Android app talks to the same encrypted backend
+                as the web. Same account, same posts, same privacy — in your pocket.
             </p>
 
             <div class="panel android-card">
@@ -303,29 +617,26 @@ require __DIR__ . '/includes/nav.php';
                     </ul>
 
                     <p class="android-card__note">
-                        This is a debug build of the Android app. It is signed
-                        with a development key, meaning future updates require
-                        uninstalling and reinstalling. That is intentional —
-                        the release build with a permanent signing key ships
-                        with the Play Store launch.
+                        The current beta is a debug build — sideloaded from this
+                        page only. A signed release build with in-app Google Play
+                        Billing is being prepared and will ship on the Google Play
+                        Store. When it does, beta users will be able to migrate
+                        cleanly.
                     </p>
 
                     <div class="android-card__actions">
                         <a href="/downloads/MyCitadel-Beta-v0.3.0.apk"
                            download
                            class="btn-cyber btn-gold">
-                            Download APK
+                            Download Beta APK
                         </a>
-                        <a href="#install-instructions"
-                           class="btn-cyber">
+                        <a href="#install-instructions" class="btn-cyber">
                             How to Install
                         </a>
                     </div>
                 </div>
-
             </div>
 
-            <!-- ── Install instructions ─────────────────────────────── -->
             <div class="android-install" id="install-instructions">
                 <h3>Installing the Beta</h3>
                 <ol>
@@ -366,33 +677,20 @@ require __DIR__ . '/includes/nav.php';
                 </p>
             </div>
         </div>
-    </section>    
-
-    <!-- ═══════════════════════════════════════════════════════════════════
-         PREMIUM TEASER
-         ═══════════════════════════════════════════════════════════════════ -->
-    <section class="citadel-section">
-        <div class="citadel-section__inner">
-            <div class="panel premium-teaser">
-                <span class="premium-teaser__badge">Premium</span>
-                <h2>$10 / month</h2>
-                <p>Advanced features, priority support, higher limits, and
-                   exclusive badges. Cancel anytime, no hidden fees. Billed
-                   securely through Stripe.</p>
-                <a href="/premium" class="btn-cyber btn-gold">Explore Premium</a>
-            </div>
-        </div>
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════════════
-         FINAL CTA
+         10 — FINAL CTA
          ═══════════════════════════════════════════════════════════════════ -->
     <section class="citadel-section citadel-section--final">
         <div class="citadel-section__inner citadel-section__inner--center">
             <span class="rune-divider">ᚠ ᚢ ᚦ ᚨ ᚱ ᚲ</span>
             <h2>Your Data Should Be Yours Alone.</h2>
             <p>Join the citizens building a better internet.</p>
-            <a href="/register" class="btn-cyber btn-gold">Enter the Citadel</a>
+            <div class="citadel-hero__cta">
+                <a href="/register" class="btn-cyber btn-gold btn-lg">Enter the Citadel</a>
+                <a href="#tiers" class="btn-cyber btn-lg">Compare Free vs Premium</a>
+            </div>
         </div>
     </section>
 

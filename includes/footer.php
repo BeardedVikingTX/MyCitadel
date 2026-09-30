@@ -76,6 +76,8 @@ require_once __DIR__ . '/config.php';
 <script src="<?= e(CITADEL_VENDORS_URL) ?>/js/login.js" defer></script>
 <script src="<?= e(CITADEL_VENDORS_URL) ?>/js/dashboard.js" defer></script>
 <script src="<?= e(CITADEL_VENDORS_URL) ?>/js/profile-edit.js?v=1" defer></script>
+<script src="<?= e(CITADEL_VENDORS_URL) ?>/js/premium.js" defer></script>
+<script src="<?= e(CITADEL_VENDORS_URL) ?>/js/premium-success.js" defer></script>
 
 <?php if (!empty($GLOBALS['citadel_extra_scripts'] ?? null)): ?>
 <?php foreach ($GLOBALS['citadel_extra_scripts'] as $src): ?>

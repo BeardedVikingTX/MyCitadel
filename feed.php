@@ -67,6 +67,12 @@ $CLIENT_HEADER = 'browser/1.0.0';
         <main class="feed-main">
 
             <!-- Composer -->
+            <div class="composer__upsell" id="composer-upsell" hidden>
+                <span class="composer__upsell-icon">★</span>
+                <span>Free tier: 50 characters, 1 image. </span>
+                <a href="/premium" class="composer__upsell-link">Go Premium</a>
+                <span> for 1,500 characters and 10 attachments.</span>
+            </div>            
             <section class="composer" id="composer">
                 <div class="composer__head">
                     <div class="composer__avatar" id="composer-avatar"></div>

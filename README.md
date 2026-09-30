@@ -2,7 +2,7 @@
 
 > **Your digital fortress. Your rules.**
 
-MyCitadel is a revolutionary privacy-first social media platform built on a zero-knowledge architecture. Unlike traditional social networks, your data is encrypted **before** it ever reaches our servers. We never see your plaintext—not your posts, messages, or personal information.
+MyCitadel is a revolutionary privacy-first social media platform built on a near zero-knowledge architecture. Unlike traditional social networks, your data is encrypted **before** it ever reaches our servers. We never see your plaintext—not your posts, messages, or personal information.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
@@ -12,7 +12,7 @@ MyCitadel is a revolutionary privacy-first social media platform built on a zero
 
 ## 🔐 Core Principles
 
-- **Zero-Knowledge Architecture** – All sensitive data is encrypted client-side. The server only stores ciphertext.
+- **Near Zero-Knowledge Architecture** – All sensitive data is encrypted client-side. The server only stores ciphertext.
 - **Argon2id Hashing** – State-of-the-art password hashing resistant to GPU/ASIC attacks.
 - **End-to-End Encryption** – Messages and private data are encrypted end-to-end.
 - **No Plaintext Ever** – We cannot read your data, even if compelled.
@@ -36,7 +36,7 @@ MyCitadel is a revolutionary privacy-first social media platform built on a zero
 | Component | Domain | Description |
 |-----------|--------|-------------|
 | Web Frontend | `mycitadel.lol` | Bootstrap, DOMPurify, ChartJS, custom UI |
-| API Backend | `api.mycitadel.lol` | PHP RESTful API, Argon2id, zero-knowledge |
+| API Backend | `api.mycitadel.lol` | PHP RESTful API, Argon2id, near zero-knowledge |
 | Secure Core | `secure_mycitadel.lol` | **Private** – encryption orchestration, key management (not publicly exposed) |
 
 ### Tech Stack
